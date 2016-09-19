@@ -1,10 +1,13 @@
+require_relative 'node_renderer.rb'
+
 Node = Struct.new(:tag, :attributes, :children, :parent)
 
 class DOMReader
+  attr_reader :root
 
-  def initialize
+  def initialize(file = nil)
     @root = Node.new("document", {:type => "document"}, [], nil)
-    get_file
+    file.nil? ? get_file : build_tree(file)
   end
 
   def get_file
@@ -71,4 +74,5 @@ class DOMReader
 
 end
 
-parser = DOMReader.new
+parser = DOMReader.new(File.read('test.html'))
+renderer = NodeRenderer.new(parser.root)
