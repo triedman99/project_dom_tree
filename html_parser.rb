@@ -41,15 +41,15 @@ class HTMLParser
 
   def outputter(node)
     current_root = node
-    puts current_root.tag
+    print current_root.tag
     current_root.children.each do |child|
       if child.is_a?(String)
-        puts child
+        print child
       else
         outputter(child)
       end
     end
-    puts "</#{current_root.tag[1..-2]}>"
+    print "</#{current_root.tag[1..-2]}>"
   end
 
 end
