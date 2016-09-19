@@ -1,4 +1,6 @@
 require_relative 'node_renderer.rb'
+require_relative 'tree_searcher.rb'
+require_relative 'node.rb'
 
 Node = Struct.new(:tag, :attributes, :children, :parent)
 
@@ -76,3 +78,5 @@ end
 
 parser = DOMReader.new(File.read('test.html'))
 renderer = NodeRenderer.new(parser.root)
+searcher = TreeSearcher.new(parser.root)
+searcher.search_by(:class, 'emphasized')
